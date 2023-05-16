@@ -3,7 +3,6 @@ import './pizza.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -70,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Pizza myPizza = Pizza.fromJson(pizza);
       myPizzas.add(myPizza);
     }
+    final myMap = myPizzas;
     String json = convertToJSON(myPizzas);
     print(json);
 

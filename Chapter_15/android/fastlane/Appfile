@@ -1,0 +1,2 @@
+json_key_file("C:\progetti in corso\cookbook\books_universal\pc-api-7882798672461870034-806-b4e16300aaef.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("it.softwarehouse.books_universal") # e.g. com.krausefx.app
