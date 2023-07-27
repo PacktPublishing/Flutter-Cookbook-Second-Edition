@@ -19,7 +19,7 @@ class FlexScreen extends StatelessWidget {
             ..._header(context, 'Flexible'),
             const DemoFlexible(),
             const Expanded(
-              child: Spacer(),
+              child: Container(),
             ),
             const DemoFooter()
           ],
