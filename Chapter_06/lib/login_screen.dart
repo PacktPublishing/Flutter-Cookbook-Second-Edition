@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _validate() {
     final form = _formKey.currentState;
-    if (form?.validate() == false) {
+    if (!(form?.validate() ?? false)) {
       return;
     }
 
