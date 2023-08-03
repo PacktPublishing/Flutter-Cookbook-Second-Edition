@@ -11,16 +11,10 @@ class PlanScreen extends StatefulWidget {
 }
 
 class _PlanScreenState extends State<PlanScreen> {
-  late ScrollController scrollController;
   Plan get plan => widget.plan;
 
   @override
   void initState() {
-    scrollController = ScrollController()
-      ..addListener(() {
-        FocusScope.of(context).requestFocus(FocusNode());
-      });
-
     super.initState();
   }
 
@@ -32,13 +26,22 @@ class _PlanScreenState extends State<PlanScreen> {
         controller.savePlan(plan);
         return Future.value(true);
       },
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Master Plan')),
-        body: Column(children: [
-          Expanded(child: _buildList()),
-          SafeArea(child: Text(plan.completenessMessage))
-        ]),
-        floatingActionButton: _buildAddTaskButton(),
+      child: GestureDetector(
+        onTap: () {
+          var f = FocusScope.of(context);
+
+          if (!f.hasPrimaryFocus) {
+            f.unfocus();
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(title: const Text('Master Plan')),
+          body: Column(children: [
+            Expanded(child: _buildList()),
+            SafeArea(child: Text(plan.completenessMessage))
+          ]),
+          floatingActionButton: _buildAddTaskButton(),
+        ),
       ),
     );
   }
@@ -56,7 +59,7 @@ class _PlanScreenState extends State<PlanScreen> {
 
   Widget _buildList() {
     return ListView.builder(
-      controller: scrollController,
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       itemCount: plan.tasks.length,
       itemBuilder: (context, index) => _buildTaskTile(plan.tasks[index]),
     );
@@ -93,7 +96,6 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   void dispose() {
-    scrollController.dispose();
     super.dispose();
   }
 }
